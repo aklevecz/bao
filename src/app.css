@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  background-color: #ec42ff;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 24px;
+  }
+}

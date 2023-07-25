@@ -1,0 +1,17 @@
+{
+  "short_name": "Bao's Haus",
+  "name": "Bao's Haus",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "FRONT.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "background_color": "#ED1B5E",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#ED1B5E",
+  "description": "Dog stuff"
+}
