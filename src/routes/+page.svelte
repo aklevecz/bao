@@ -243,9 +243,9 @@
   }
   .chat-icon {
     position: absolute;
-    left: 20px;
-    top: 13px;
-    font-size: 36px;
+    left: 25%;
+    top: 5px;
+    font-size: 56px;
     cursor: pointer;
     pointer-events: none;
     filter: brightness(0) invert(1);
