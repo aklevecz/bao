@@ -1,5 +1,5 @@
 import { CHICKEN_SECRET } from "$env/static/private";
-import { cookieKeys } from "$stores/constants";
+import { cookieKeys } from "$lib/constants";
 import { error, json } from "@sveltejs/kit";
 import { jwtVerify } from "jose";
 

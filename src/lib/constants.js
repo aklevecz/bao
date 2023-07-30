@@ -11,7 +11,12 @@ export const baoMessages = {
 };
 
 export const responseTokens = {
-  auth: { chickenMasterpiece: "time to draw a chicken", uploadChicken: "show me the chicken" },
+  auth: {
+    chickenMasterpiece: "time to draw a chicken",
+    uploadChicken: "show me the chicken",
+    signOut: "signing you out right now!",
+  },
+  views: { tv: "time to tune in to the bao show" },
 };
 
 /** @typedef {('bao' | 'user')} Author*/

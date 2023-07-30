@@ -1,6 +1,6 @@
 import { CHICKEN_SECRET } from "$env/static/private";
 import { resetSession } from "$lib/utils";
-import { cookieKeys } from "$stores/constants";
+import { cookieKeys } from "$lib/constants";
 import { jwtVerify } from "jose";
 
 /** @type {import('@sveltejs/kit').Handle} */

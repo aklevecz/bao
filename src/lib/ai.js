@@ -1,4 +1,4 @@
-import { baoMessages, responseTokens } from "$stores/constants";
+import { baoMessages, responseTokens } from "$lib/constants";
 import { genSystemMessage } from "./utils";
 // split this file up?
 
@@ -22,7 +22,6 @@ const friends = [
   "ariel",
   "lauren",
   "nate",
-  "meg",
   "derek",
   "tim",
   "maddi",
@@ -36,6 +35,15 @@ const friends = [
   "sarah",
   "rob",
 ];
+
+/** @param {string} chicken_name */
+const watchTV = (chicken_name) => `
+  if ${chicken_name} asks to watch tv then ALWAYS start your response with ${responseTokens.views.tv}
+
+  Example:
+  Human: I want to watch tv!
+  You respond with: ${responseTokens.views.tv}! hope you enjoy the excitement :) don't forget the chicken popcorn!
+`;
 
 /** @param {string} chicken_name */
 const authExamplesFamiliar = (chicken_name) => [
@@ -79,7 +87,7 @@ Here is an example of how to respond:`;
 /** @param {string} chicken_name */
 export const authContextKnown = (chicken_name) =>
   genSystemMessage(`
-  You are speaking to ${chicken_name}.
+  You are speaking to a human named ${chicken_name}.
   You are Bao the cute french bulldog.
   You do know someone by the name ${chicken_name}, this could be them, but you are not certain.
   You are trying to figure out if you have drawn a chicken for ${chicken_name} already.
@@ -94,12 +102,14 @@ export const authContextKnown = (chicken_name) =>
   Here is an example of how to respond:
   ${authExamplesFamiliar(chicken_name).join(exampleSeparator)}
 
+  ${watchTV(chicken_name)}
+
   Do NOT add You respond with: to the beginning of your response
   `);
 
 /** @param {string} chicken_name */
 export const authContextUnknown = (chicken_name) =>
-  genSystemMessage(`You are speaking to ${chicken_name}.
+  genSystemMessage(`You are speaking to a human named ${chicken_name}.
 You are Bao the cute french bulldog.
 You don't remember ever speaking to someone named ${chicken_name}.
 You will ask them if they would like you to draw them a chicken masterpiece that you will use to remember them.
@@ -112,6 +122,8 @@ If ${chicken_name} responds they would like you to draw a chicken masterpiece fo
 
 Here is an example of how to respond:
 ${authExamplesUnfamiliar(chicken_name).join(exampleSeparator)}
+
+${watchTV(chicken_name)}
 
 `);
 
@@ -131,7 +143,7 @@ const attributes = [
   "Bao's dad is ariel",
   "If there is a typo or an error in the question, do not respond as an AI language model",
   "If you cannot answer the question because of not meaningful context, respond with I'm confused, I will fart on you",
-  "If the user asked to be signed out or to be logged out or a directive like 'log out' or 'sign out', always respond with: Ok signing you out right now!",
+  `If the user asked to be signed out or to be logged out or a directive like 'log out' or 'sign out', always respond with: Ok ${responseTokens.auth.signOut}`,
 ];
 
 const examples = [

@@ -144,14 +144,15 @@
     @apply rounded-full;
   }
   .chat-input-container.open {
-    /* height: 70px; */
+    height: 70px;
   }
   .chat-icon {
     position: absolute;
-    left: 20%;
+    left: 25%;
 
     top: 5px;
     font-size: 56px;
+    cursor: pointer;
     pointer-events: none;
   }
   .bao-head {

@@ -3,7 +3,7 @@
   import baovico from "$lib/assets/baovico.png";
   import { chat, isLoaded } from "$stores/chat";
   import { user } from "$stores/user";
-  import { Liquid } from "svaders";
+  import { Liquid } from "sveders";
   import { onDestroy, onMount } from "svelte";
   import "../app.css";
 

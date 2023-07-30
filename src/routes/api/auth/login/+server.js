@@ -1,6 +1,6 @@
 import db from "$lib/db";
 import { signToken } from "$lib/user-utils";
-import { cookieKeys } from "$stores/constants";
+import { cookieKeys } from "$lib/constants";
 import { error, json } from "@sveltejs/kit";
 /**
  *

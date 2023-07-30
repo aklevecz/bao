@@ -1,12 +1,10 @@
 import { OPENAI_KEY } from "$env/static/private";
-import { authContextKnown, authContextUnknown, systemMessage, waitListSys } from "$lib/ai";
-import azure from "$lib/azure";
+import { authContextKnown, authContextUnknown, systemMessage } from "$lib/ai";
+import { baoMessages, cookieKeys } from "$lib/constants";
 import db from "$lib/db.js";
 import errors from "$lib/errors";
-// import openai from "$lib/openai.js";
 import kv from "$lib/server/kv.js";
 import { genAssistantQuestion, genUserQuestion, redisKey, resetSession } from "$lib/utils.js";
-import { baoMessages, cookieKeys } from "$stores/constants";
 import { error, json } from "@sveltejs/kit";
 
 /** @typedef {{role: string, content: string}} ChatExamples  */
@@ -161,13 +159,6 @@ export async function GET({ locals, url, cookies }) {
     throw error(404, errors.AZURE_NO_RESPONSE);
   }
 }
-
-const authFlowStates = {
-  initial: 0,
-  askedIfHasChicken: 1,
-};
-
-let authFlowState = 0;
 
 export async function POST({ request, locals, url, cookies }) {
   /** @type {{question:string, lastAnswer:string , authState:number}} */
@@ -331,7 +322,7 @@ export async function PATCH({ request, locals }) {
     await kv.rpush(key, JSON.stringify(genAssistantQuestion(lastBaoChat)));
     kv.expire(key, 60 * 60);
   }
-  return json(authFlowState);
+  return json(locals.authFlowState);
 }
 
 /**

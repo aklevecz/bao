@@ -2,7 +2,7 @@ import { endpoints } from "$lib/api";
 import errors from "$lib/errors";
 import { delay } from "$lib/utils";
 import { get, writable } from "svelte/store";
-import { baoMessages, commands, initialChat } from "./constants";
+import { baoMessages, commands, initialChat } from "../lib/constants";
 import { game } from "./game";
 import { user } from "./user";
 import locals from "$lib/locals";
@@ -69,6 +69,8 @@ function createChat() {
       const userState = get(user);
       const gameState = get(game);
       const hasCaughtChicken = gameState.caughtChicken || userState.chicken_tokens > 0;
+      console.log(userState);
+      console.log(gameState);
       /**
        * @type {*}
        */

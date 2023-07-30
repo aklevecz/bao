@@ -1,4 +1,4 @@
-import { cookieKeys, responseTokens } from "$stores/constants";
+import { cookieKeys, responseTokens } from "$lib/constants";
 
 /**
  * @param {string} question

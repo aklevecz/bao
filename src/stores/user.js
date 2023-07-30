@@ -1,14 +1,16 @@
 import api, { endpoints } from "$lib/api";
 import { get, writable } from "svelte/store";
 import { chat } from "./chat";
-import { authStates, baoMessages, responseTokens } from "./constants";
+import { authStates, baoMessages, responseTokens } from "../lib/constants";
 
 /**
  *
  * @param {string} imageBase64
  */
 const loginFetcher = async (imageBase64) => {
-  const res = await fetch(endpoints.auth.login, { method: "POST", body: JSON.stringify({ imageBase64 }) }).then((r) => r.json());
+  const res = await fetch(endpoints.auth.login, { method: "POST", body: JSON.stringify({ imageBase64 }) }).then((r) =>
+    r.json()
+  );
   const { token, user } = res;
   return { token, user };
 };
@@ -16,7 +18,7 @@ const loginFetcher = async (imageBase64) => {
 function createUser() {
   /** @typedef {number} ChickenToken */
   /** @typedef {*} User */
-  /** @typedef {{authed:boolean, authState:number, user:User, loading: boolean, chicken_tokens:number}} UserState*/
+  /** @typedef {{authed:boolean, authState:number, user:User, loading: boolean, chicken_tokens:number, watchTV:boolean}} UserState*/
   /** @type {import("svelte/store").Writable<UserState>} */
   const userState = writable({
     authed: false,
@@ -24,6 +26,7 @@ function createUser() {
     user: {},
     loading: true,
     chicken_tokens: 0,
+    watchTV: false,
   });
   const { subscribe, set, update } = userState;
 
@@ -44,7 +47,7 @@ function createUser() {
      */
     login: async (imageBase64) => {
       const { user: userInfo } = await loginFetcher(imageBase64);
-
+      console.log(userInfo);
       if (userInfo) {
         update((user) => {
           return {
@@ -55,7 +58,7 @@ function createUser() {
             chicken_tokens: userInfo.chicken_tokens,
           };
         });
-        const haschicken_tokens = userInfo.chicken_tokens.amount > 0;
+        const haschicken_tokens = userInfo.chicken_tokens > 0;
         chat.injectChat({
           content: `welcome ${userInfo.chicken_name}! ${
             !haschicken_tokens ? "hey ummm can you help me grab that chicken floating around? i'm hungry af!" : ""
@@ -100,7 +103,10 @@ function createUser() {
       return chat.subscribe(async (chats) => {
         if (chats.length >= 2) {
           const lastChat = chats[chats.length - 1].content;
-          if (lastChat.includes(responseTokens.auth.chickenMasterpiece) && get(user).authState === authStates.preAuth) {
+          if (
+            lastChat.includes(responseTokens.auth.chickenMasterpiece)
+            // && get(user).authState === authStates.preAuth
+          ) {
             const username = chats[chats.length - 2].content;
             update((u) => ({ ...u, authState: authStates.drawingChicken }));
             const { image, user: userInfo } = await api.fetchImage(username);
@@ -116,9 +122,14 @@ function createUser() {
             update((u) => ({ ...u, authState: authStates.uploadingChicken }));
           }
 
-          if (lastChat.includes("signing you out right now!")) {
+          if (lastChat.includes(responseTokens.auth.signOut)) {
             await fetch(endpoints.auth.logout);
             window.location.reload();
+          }
+
+          // this should dispatch some sort of action to turn the tv on
+          if (lastChat.includes(responseTokens.views.tv)) {
+            update((u) => ({ ...u, watchTV: true }));
           }
         }
       });

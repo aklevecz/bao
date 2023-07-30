@@ -3,12 +3,13 @@
   import api from "$lib/api";
   import { autoScroll, removeTokensFromMessage } from "$lib/utils";
   import { chat, isThinking } from "$stores/chat";
-  import { authStates } from "$stores/constants";
+  import { authStates } from "$lib/constants";
   import { user } from "$stores/user";
   import { afterUpdate, onMount } from "svelte";
   import UploadChicken from "./UploadChicken.svelte";
   import Chatting from "./icons/Chatting.svelte";
   import Paint from "./icons/Paint.svelte";
+  import Tv from "./TV.svelte";
 
   export let isFocused = false;
   /** @type {symbol[]} liked */
@@ -55,6 +56,7 @@
       author: "bao",
     });
   }
+  $: console.log($user);
 </script>
 
 <!-- FOCUS EFFECT TO PUSH DOWN CHAT <div
@@ -62,6 +64,9 @@
   class:is-focused={isFocused}
   class="flex flex-col gap-3 text-white px-2 border-0 min-h-[200px] flex-[1_0_45%] overflow-scroll overflow-x-hidden pt-[80px] md:pt-[120px]"
 > -->
+{#if $user.watchTV}
+  <Tv />
+{/if}
 <div
   bind:this={chatContainer}
   class="flex flex-col gap-3 text-white px-2 border-0 min-h-[200px] flex-[1_0_45%] overflow-scroll overflow-x-hidden pt-[80px] md:pt-[120px]"
@@ -70,7 +75,9 @@
     <div class:user={msg.author === "user"} class="flex justify-normal items-center gap-2">
       <div class="block max-w-[85%]">
         <!-- <div>{JSON.stringify(msg)}</div> -->
-        <div class="chat_bubble">{removeTokensFromMessage(msg.content)}</div>
+        <!-- <div class="chat_bubble">{removeTokensFromMessage(msg.content)}</div> -->
+        <div class="chat_bubble">{msg.content}</div>
+
         {#if msg.image}<div class="relative flex flex-col gap-2">
             <img
               id="img"
