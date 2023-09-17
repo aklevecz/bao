@@ -17,6 +17,8 @@
   import Paw from "$components/svgs/Paw.svelte";
 
   import baoHead from "$lib/assets/bao.png";
+  import { urlB64ToUint8Array } from "$lib/utils";
+  import { PUBLIC_VAPID_KEY } from "$env/static/public";
 
   let isFocused = false;
 
@@ -93,6 +95,51 @@
       unsub();
     }
   });
+
+  async function onSubscribe() {
+    const result = await Notification.requestPermission();
+    console.log(result);
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) {
+      return;
+    }
+    const subscribed = await registration.pushManager.getSubscription();
+    if (subscribed) {
+      console.info("User is already subscribed.", subscribed);
+      // notifyMeButton.disabled = false;
+      // unsubscribeButton.disabled = false;
+      return;
+    }
+    const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlB64ToUint8Array(PUBLIC_VAPID_KEY),
+    });
+    fetch("/api/add/subscription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(subscription),
+    });
+  }
+
+  async function onNotifyMe() {
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) {
+      return;
+    }
+    const subscription = await registration.pushManager.getSubscription();
+    if (!subscription) {
+      return;
+    }
+    fetch("api/notify/me", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ endpoint: subscription.endpoint }),
+    });
+  }
 </script>
 
 <div class="font-bold relative text-secondary p-4 tracking-widest text-3xl">
@@ -103,6 +150,10 @@
     <img bind:this={baoHeadRef} class="fixed bao-head w-20 h-20 m-auto -ml-10" alt="BAO" src={baoHead} />
   </div>
   <!-- </div> -->
+  <div>
+    <button on:click={onSubscribe}>subscribe</button>
+    <button on:click={onNotifyMe}>notify me</button>
+  </div>
 </div>
 {#if $user.loading || !$isLoaded}<div
     class="flex flex-col items-center text-5xl gap-3 justify-center h-2/3 min-h-[300px] mix-blend-difference font-bold text-black bg-red-500 rounded-full"
