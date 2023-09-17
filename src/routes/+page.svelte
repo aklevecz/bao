@@ -108,13 +108,13 @@
       console.info("User is already subscribed.", subscribed);
       // notifyMeButton.disabled = false;
       // unsubscribeButton.disabled = false;
-      return;
+      // return;
     }
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlB64ToUint8Array(PUBLIC_VAPID_KEY),
     });
-    fetch("/api/add/subscription", {
+    fetch("/api/subscription/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

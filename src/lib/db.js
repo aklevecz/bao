@@ -23,6 +23,47 @@ const findUserByHex = async (chickenHex) => {
   return response.Item;
 };
 
+/** @param {any} subscription */
+const createNotificationSubscription = async (subscription) => {
+  const command = new PutCommand({
+    TableName: table,
+    Item: {
+      pk: subscription.endpoint,
+      sk: subscription.endpoint,
+      ...subscription,
+    },
+  });
+
+  try {
+    const response = await docClient.send(command);
+  } catch (e) {
+    console.error("error saving subscription, ", subscription);
+    return null;
+  }
+
+  return { success: true, ...subscription };
+};
+
+/** @param {string} endpoint */
+const findNotificationSubscription = async (endpoint) => {
+  const command = new GetCommand({
+    TableName: table,
+    Key: {
+      pk: endpoint,
+      sk: endpoint,
+    },
+  });
+
+  try {
+    const response = await docClient.send(command);
+
+    return response.Item;
+  } catch (e) {
+    console.error("there was an error fetching the subscription");
+    return null;
+  }
+};
+
 /**
  *
  * @typedef {{chicken_name:string, secret:string}} UserCreation
@@ -93,10 +134,17 @@ const addWaitlistMessages = async (sessionStart, messages) => {
   });
 
   const res = await docClient.send(command);
-  console.log(res);
 };
 
-export default { findUserByHex, createUser, fetchAllUsers, updateChickenTokens, addWaitlistMessages };
+export default {
+  findUserByHex,
+  createUser,
+  fetchAllUsers,
+  updateChickenTokens,
+  addWaitlistMessages,
+  createNotificationSubscription,
+  findNotificationSubscription,
+};
 
 // FIND UNIQUE USER
 //   const user = await prisma.users.findUnique({
