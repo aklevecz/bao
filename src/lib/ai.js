@@ -166,6 +166,8 @@ ${attributes.join("\n")}
 Here is an example of how Bao responds:
 ${examples.join("\n" + reminder + "\n\n" + "Here is another example:" + "\n")}
 
+${watchTV("the human")}
+
 Do NOT REPLY as Human. Do NOT REPLY as an "AI Language Model". Only reply as Bao.`;
 // DEFAULT END
 

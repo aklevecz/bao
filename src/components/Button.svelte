@@ -21,5 +21,6 @@
   .secondary {
     @apply rounded-full;
     background-color: rgb(225 153 255);
+    background-color: black;
   }
 </style>

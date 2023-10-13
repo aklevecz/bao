@@ -1,6 +1,7 @@
 export const baoMessages = {
   waitlist: "hey this is bao 🐶 do you want to join the waitlist?",
-  login: "hey this is bao 🐶 who am i speaking to? please respond with only your name",
+  login:
+    "hey this is bao 🐶 who am i speaking to? please respond with only your first name or what you would like to be called",
   downloadToSignIn: "download your chicken drawing so we can remember each other forever!",
   noSpacesPlease: "no spaces please! just what you would like to be called with one word",
   ow: "ow my head hurts, somethere is wrong with my brain-- give me a moment (if this keeps happening you can type !brainwash to clear my brain caches)",

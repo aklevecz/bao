@@ -28,7 +28,7 @@
   let inputEl;
 
   /** @type { number}*/
-  let inputWidthDim = 100;
+  let inputWidthDim = 80;
   /** @type {import("svelte/motion").Spring<number>}*/
   let inputWidth = spring(inputWidthDim, {
     stiffness: 0.05,
@@ -36,7 +36,7 @@
   });
 
   /** @type { number}*/
-  let inputHeightDim = 100;
+  let inputHeightDim = 80;
   /** @type {import("svelte/motion").Spring<number>}*/
   let inputHeight = spring(inputHeightDim, {
     stiffness: 0.05,
@@ -85,7 +85,7 @@
       unsub = user.listener();
     }
     if (window.innerWidth > 768) {
-      inputWidthDim = 100;
+      inputWidthDim = 80;
       inputWidth.set(inputWidthDim);
     }
   });
@@ -98,7 +98,6 @@
 
   async function onSubscribe() {
     const result = await Notification.requestPermission();
-    console.log(result);
     const registration = await navigator.serviceWorker.getRegistration();
     if (!registration) {
       return;
@@ -140,6 +139,8 @@
       body: JSON.stringify({ endpoint: subscription.endpoint }),
     });
   }
+
+  // the purple color: #e199ff
 </script>
 
 <div class="font-bold relative text-secondary p-4 tracking-widest text-3xl">
@@ -150,9 +151,11 @@
     <img bind:this={baoHeadRef} class="fixed bao-head w-20 h-20 m-auto -ml-10" alt="BAO" src={baoHead} />
   </div>
   <!-- </div> -->
-  <div>
-    <button on:click={onSubscribe}>subscribe</button>
-    <button on:click={onNotifyMe}>notify me</button>
+  <div class="flex">
+    <div class="flex items-center justify-center bg-[#fff] rounded-full w-14 h-14">
+      <button class="inverted-icon-outline" on:click={onSubscribe}>🔔</button>
+      <!-- <button on:click={onNotifyMe}>notify me</button> -->
+    </div>
   </div>
 </div>
 {#if $user.loading || !$isLoaded}<div
@@ -169,7 +172,7 @@
     >
       {#if $inputWidth === inputWidthDim}<div class="chat-icon">💬</div>{/if}
       <input
-        class="bg-transparent text-[#e199ff] px-2 py-1 flex-1 rounded-none"
+        class="bg-transparent text-[#000] px-2 py-1 flex-1 rounded-none font-bold"
         bind:value={question}
         bind:this={inputEl}
         on:click={onClick}
@@ -180,7 +183,7 @@
       />
       {#if question}
         <div in:scale out:scale>
-          <Button disable={$isResponding} variant="secondary" class="h-[40px] w-[40px]" on:click={onGo}>
+          <Button disable={$isResponding} variant="secondary" class="h-[100%] w-[40px]" on:click={onGo}>
             <Paw />
           </Button>
         </div>
@@ -192,6 +195,7 @@
 <style>
   .chat-input-container {
     background-color: #00feed;
+    background-color: #fff;
     @apply rounded-full;
   }
   .chat-input-container.open {
@@ -199,12 +203,13 @@
   }
   .chat-icon {
     position: absolute;
-    left: 25%;
-
-    top: 5px;
-    font-size: 56px;
+    left: 20px;
+    top: 13px;
+    font-size: 36px;
     cursor: pointer;
     pointer-events: none;
+    filter: brightness(0) invert(1);
+    mix-blend-mode: difference;
   }
   .bao-head {
     animation: tripout 30000ms infinite alternate;
@@ -231,5 +236,10 @@
       font-size: 50px;
       top: 10px;
     }
+  }
+
+  .inverted-icon-outline {
+    filter: brightness(0) invert(1);
+    mix-blend-mode: difference;
   }
 </style>
