@@ -141,9 +141,46 @@
     });
   }
 
+  /** @type {any} */
+  let deferredPrompt
+  onMount(() => {
+        window.addEventListener("beforeinstallprompt", (e) => {
+          alert("beforeinstallprompt");
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Update UI notify the user they can install the PWA
+      // setInstallable(true);
+    });
+
+    window.addEventListener('appinstalled', () => {
+      // Log install to analytics
+      console.log('INSTALL: Success');
+    });
+
+  })
+
+  /** @param {MouseEvent} e */
+    const handleInstallClick = (e) => {
+      // Hide the app provided install promotion
+      // setInstallable(false);
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then((/** @type {any}*/choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+      });
+  };
   // the purple color: #e199ff
 </script>
-
+          <button class="install-button" on:click={handleInstallClick}>
+            INSTALL ME
+          </button>
 <div class="font-bold relative text-secondary p-4 tracking-widest text-3xl">
   {#if $isThinking}
     <Thinking />{/if}
