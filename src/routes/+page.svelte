@@ -19,6 +19,7 @@
   import baoHead from "$lib/assets/bao.png";
   import { urlB64ToUint8Array } from "$lib/utils";
   import { PUBLIC_VAPID_KEY } from "$env/static/public";
+  import { goto } from "$app/navigation";
 
   let isFocused = false;
 
@@ -144,32 +145,34 @@
 </script>
 
 <div class="font-bold relative text-secondary p-4 tracking-widest text-3xl">
-  {#if $isThinking} <Thinking />{/if}
+  {#if $isThinking}
+    <Thinking />{/if}
   {#if $user.authed}<ChickenTokenCounter />{/if}
   <!-- <div class="bao-head-container flex justify-center fixed w-full"> -->
   <div>
     <img bind:this={baoHeadRef} class="fixed bao-head w-20 h-20 m-auto -ml-10" alt="BAO" src={baoHead} />
   </div>
   <!-- </div> -->
-  <div class="flex">
-    <div class="flex items-center justify-center bg-[#fff] rounded-full w-14 h-14">
-      <button class="inverted-icon-outline" on:click={onSubscribe}>🔔</button>
+  <!-- <div class="flex"> -->
+    <!-- <div class="flex items-center justify-center bg-[#fff] rounded-full w-14 h-14"> -->
+      <!-- <button class="inverted-icon-outline" on:click={onSubscribe}>🔔</button> -->
       <!-- <button on:click={onNotifyMe}>notify me</button> -->
+    <!-- </div> -->
+  <!-- </div> -->
+    <div class="flex max-w-3xl m-auto">
+    <div class="flex items-center justify-center bg-[#fff] rounded-full w-14 h-14">
+      <button class="rounded-full" on:click={() =>{
+        goto("/gallery");
+      }}><img class="rounded-full" src="/chicken-icon.png" alt="chicken"/></button>
     </div>
   </div>
 </div>
-{#if $user.loading || !$isLoaded}<div
-    class="flex flex-col items-center text-5xl gap-3 justify-center h-2/3 min-h-[300px] mix-blend-difference font-bold text-black bg-red-500 rounded-full"
-  >
+{#if $user.loading || !$isLoaded}<div class="flex flex-col items-center text-5xl gap-3 justify-center h-2/3 min-h-[300px] mix-blend-difference font-bold text-black bg-red-500 rounded-full">
     <Dogging />LOADING...
   </div>{/if}
 {#if !$user.loading && $isLoaded}<Chat {isFocused} />{/if}
 {#if $isLoaded}<div class="flex justify-between items-center gap-3 pt-3">
-    <div
-      class="chat-input-container relative m-auto bg-white w-full flex p-[8px]"
-      class:open={$inputWidth !== inputWidthDim}
-      style={`width:${$inputWidth}px;height:${$inputHeight}px`}
-    >
+    <div class="chat-input-container relative m-auto bg-white w-full flex p-[8px]" class:open={$inputWidth !== inputWidthDim} style={`width:${$inputWidth}px;height:${$inputHeight}px`}>
       {#if $inputWidth === inputWidthDim}<div class="chat-icon">💬</div>{/if}
       <input
         class="bg-transparent text-[#000] px-2 py-1 flex-1 rounded-none font-bold"
@@ -228,18 +231,9 @@
   }
 
   @media (min-width: 768px) {
-    .chat-input-container {
-      /* width: 100px;
-      height: 100px; */
+    .inverted-icon-outline {
+      filter: brightness(0) invert(1);
+      mix-blend-mode: difference;
     }
-    .chat-icon {
-      font-size: 50px;
-      top: 10px;
-    }
-  }
-
-  .inverted-icon-outline {
-    filter: brightness(0) invert(1);
-    mix-blend-mode: difference;
   }
 </style>

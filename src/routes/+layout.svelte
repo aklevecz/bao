@@ -32,7 +32,7 @@
   <link rel="icon" type="image/svg" href={baovico} />
   <meta property="og:image" content={$page.url.origin + "/SUMMARY_CARD.png"} />
 </svelte:head>
-<div style={`height:${height || 500}px`} class="app_container flex flex-col text-primary p-3 max-w-3xl m-auto">
+<div style={`height:${height || 500}px`} class="app_container flex flex-col text-primary p-3 m-auto">
   <slot />
   <div class="fixed left-0 top-0 w-full h-full z-[-1]">
     <Liquid />

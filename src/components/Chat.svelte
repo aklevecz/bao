@@ -69,7 +69,7 @@
 {/if}
 <div
   bind:this={chatContainer}
-  class="flex flex-col gap-3 text-white px-2 border-0 min-h-[200px] flex-[1_0_45%] overflow-scroll overflow-x-hidden pt-[80px] md:pt-[120px]"
+  class="flex flex-col gap-3 text-white px-2 border-0 max-w-3xl m-auto min-h-[200px] flex-[1_0_45%] overflow-scroll overflow-x-hidden pt-[80px] md:pt-[120px]"
 >
   {#each $chat as msg, index}
     <div class:user={msg.author === "user"} class="flex justify-normal items-center gap-2">

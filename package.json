@@ -37,6 +37,7 @@
     "@upstash/redis": "^1.22.0",
     "@vercel/kv": "^0.2.2",
     "jose": "^4.14.4",
+    "masonry-layout": "^4.2.2",
     "openai": "^3.3.0",
     "redis": "^4.6.7",
     "sveders": "^0.0.11",
