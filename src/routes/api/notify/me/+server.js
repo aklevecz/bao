@@ -57,11 +57,11 @@ function sendNotifications(subscriptions = [defaultSub]) {
     const id = endpoint.substr(endpoint.length - 8, endpoint.length);
     webpush
       .sendNotification(subscription, notification, options)
-      .then((result) => {
+      .then((/** @type {any} */  result) => {
         console.log(`Endpoint ID: ${id}`);
         console.log(`Result: ${result.statusCode}`);
       })
-      .catch((error) => {
+      .catch((/** @type {any} */  error) => {
         console.log(`Endpoint ID: ${id}`);
         console.log(`Error: ${error} `);
       });
