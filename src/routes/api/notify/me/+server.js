@@ -1,8 +1,9 @@
 import { SECRET_VAPID_KEY } from "$env/static/private";
 import { PUBLIC_VAPID_KEY } from "$env/static/public";
 import db from "$lib/db";
-import webpush from "web-push";
-
+// import webpush from "web-push";
+/** @type {any} */
+var webpush;
 const defaultSub = {
   endpoint:
     "https://fcm.googleapis.com/fcm/send/fZnUE3k9TDI:APA91bFkbJL6zvqjxurjorakBPZyo4UtG5zZOb8LbcGf9-BtB9y2KkanaJj4MIWlA1B1w6BYWnSmuHMtjZs_HlpLX8qfTVLrriBrYehUPJ0QW1aHur4TJQSQ2JGuOXodi9mBaYdL5rTi",
