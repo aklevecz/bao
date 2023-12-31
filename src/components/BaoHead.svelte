@@ -1,7 +1,7 @@
 <script>
     import baoHead from "$lib/assets/bao.png";
 </script>
-<img class="absolute bao-head w-20 h-20 m-auto -ml-10" alt="BAO" src={baoHead} />
+<img class="absolute bao-head w-20 h-20 m-auto -ml-10" alt="BAO" src={'/bao.png'} />
 
 <style>
   .bao-head {

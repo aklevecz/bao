@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" type="image/svg" href={baovico} />
+  <link rel="icon" type="image/svg" href={$page.url.origin + '/baovico.png'} />
   <meta property="og:image" content={$page.url.origin + "/SUMMARY_CARD.png"} />
 </svelte:head>
 <div style={`height:${height || 500}px`} class="app_container flex flex-col text-primary p-3 m-auto">
