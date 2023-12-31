@@ -10,6 +10,28 @@
     const o = { src: `/chickems/${i}-image.png`, name: `Chicken ${i}`, date: "November 2023" };
     imgs.push(o);
   }
+
+  /** @param {*} node */
+  export function lazyLoad(node) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          // @ts-ignore
+          img.src = img.dataset.src;
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    observer.observe(node);
+
+    return {
+      destroy() {
+        observer.unobserve(node);
+      }
+    };
+  }
 </script>
 
 <BaoHead />
@@ -18,12 +40,12 @@
   <p class="desc">enjoy my various chicken masterpieces</p>
   <section class="grid--masonry">
     {#each imgs as img}
-      <div class="grid-item">
-        <img src={img.src} alt="chickem" />
-        <h3>{img.name}</h3>
-        <h4>{img.date}</h4>
-      </div>
-    {/each}
+    <div class="grid-item">
+      <img use:lazyLoad data-src={img.src} alt="chicken" />
+      <h3>{img.name}</h3>
+      <h4>{img.date}</h4>
+    </div>
+  {/each}
   </section>
 </div>
 
