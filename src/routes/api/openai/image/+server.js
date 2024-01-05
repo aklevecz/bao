@@ -1,20 +1,13 @@
-import { OPENAI_KEY as apiKey, R2_ID, R2_SECRET } from "$env/static/private";
+import { OPENAI_KEY as apiKey } from "$env/static/private";
 import db from "$lib/db.js";
+import S3 from "$lib/s3";
 import { signToken } from "$lib/user-utils";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { error, json } from "@sveltejs/kit";
 
-const r2Endpoint = "https://51f8bc25fa28f29dafad8fac5d55a08a.r2.cloudflarestorage.com";
 const endpoint = "https://api.openai.com/v1/images/generations";
 
-const S3 = new S3Client({
-  region: "auto",
-  endpoint: r2Endpoint,
-  credentials: {
-    accessKeyId: R2_ID,
-    secretAccessKey: R2_SECRET,
-  },
-});
+
 
 /**
  *

@@ -32,9 +32,9 @@
       <img  src="icons/chat-icon.png" alt="chicken" />
       <div>Chat</div>
     </a>
-    <a href="/selfies" aria-label="go to selfies" class="nav-link">
+    <a href="/baostagram" aria-label="go to selfies" class="nav-link">
       <img src="icons/bao-painted-icon.png" alt="chicken" />
-      <div>Selfies</div>
+      <div>Baostagram</div>
   </nav>
 </div>
 

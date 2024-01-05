@@ -9,6 +9,9 @@ export const endpoints = {
     login: "/api/auth/login",
     logout: "/api/auth/logout",
   },
+  baostagram: {
+    images: "/api/baostagram",
+  },
   chat: "/api/openai/chat",
 };
 
@@ -36,5 +39,9 @@ export const fetchChickenTokens = () => fetch(endpoints.db.chickenTokens).then((
 export const incrementChickenTokens = async (chicken) => {
   const res = await fetch(endpoints.db.chickenTokens, { method: "POST", body: JSON.stringify({ chicken }) });
 };
+
+export const fetchAllBaostagramUrls = () => {
+  return fetch(endpoints.baostagram.images).then((r) => r.json());
+}
 
 export default { saveQuestion, fetchImage, incrementChickenTokens, fetchChickenTokens };
