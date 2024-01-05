@@ -1,4 +1,4 @@
-import fs from 'fs';
+// import fs from 'fs';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {
@@ -9,6 +9,6 @@ export async function GET() {
 export async function POST({request}) {
     const imageData = await request.arrayBuffer();
     const buffer = Buffer.from(imageData);
-    await fs.writeFileSync('./image.png', buffer);
+    // await fs.writeFileSync('./image.png', buffer);
         return new Response();
 };
