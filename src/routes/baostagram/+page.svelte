@@ -48,7 +48,7 @@
 
 <style>
   h1 {
-    @apply text-5xl font-bold text-black bg-white py-1 px-4 rounded-md;
+    @apply text-5xl font-bold text-purple-300 bg-green-300 py-1 px-4 rounded-md;
   }
   img {
     min-height: 400px;

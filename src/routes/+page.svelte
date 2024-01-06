@@ -21,7 +21,7 @@
 </script>
 
 <BaoHead />
-<div class="container">
+<div class="container m-[100px_auto] md:m-[150px_auto] w-full">
   <div class="welcome-text">{displayedText}</div>
   <nav>
     <a href="/gallery" aria-label="go to gallery page" class="nav-link">
@@ -40,17 +40,18 @@
 
 <style>
   .container {
-    @apply mt-[100px] text-black font-bold text-2xl h-full;
+    @apply  text-black font-bold text-2xl h-full flex flex-col items-center;
     height: 100%;
   }
   .welcome-text {
     @apply text-3xl capitalize p-4 bg-white;
   }
   nav {
-    @apply flex justify-center flex-wrap gap-10 p-2;
+    @apply flex justify-center items-center flex-wrap gap-10 p-2 mt-4;
   }
   .nav-link {
     flex: 0 0 40%;
+    max-width: 300px;
     @apply text-xl text-center;
   }
   .nav-link img {
