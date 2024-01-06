@@ -10,13 +10,13 @@ export async function GET() {
   const urls = []
   if (res.Contents) {
     for (const {Key, LastModified} of res.Contents) {
-        const command = new GetObjectCommand({ Bucket: "bao", Key });
+        // const command = new GetObjectCommand({ Bucket: "bao", Key });
         // @ts-ignore
-        const signedUrl = await getSignedUrl(S3, command);
-        urls.push({url:signedUrl, lastModified: LastModified})
+        // const signedUrl = await getSignedUrl(S3, command);
+        urls.push({url:"", lastModified: LastModified, key: Key})
     }
   }
-
-  //cache this response for 5 minutes
-    return json(urls, {headers: {'Cache-Control': 'max-age=300'}});
+  const headers= {'Cache-Control': 'max-age=300'}
+  //cache this response for   5 minutes
+    return json(urls);
 }

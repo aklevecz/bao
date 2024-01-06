@@ -26,15 +26,15 @@
   <nav>
     <a href="/gallery" aria-label="go to gallery page" class="nav-link">
      <img  src="/chicken-icon.png" alt="chicken" />
-     <div>Chicken Gallery</div>
+     <div class="link-label">Chickens</div>
     </a>
     <a href="/chat" aria-label="go to chat" class="nav-link">
       <img  src="icons/chat-icon.png" alt="chicken" />
-      <div>Chat</div>
+      <div class="link-label">Chat</div>
     </a>
     <a href="/baostagram" aria-label="go to selfies" class="nav-link">
-      <img src="icons/bao-painted-icon.png" alt="chicken" />
-      <div>Baostagram</div>
+      <img id="bao-head" src="icons/bao-painted-icon.png" alt="chicken" />
+      <div class="link-label">Baostagram</div>
   </nav>
 </div>
 
@@ -44,16 +44,19 @@
     height: 100%;
   }
   .welcome-text {
-    @apply text-3xl capitalize p-4;
+    @apply text-3xl capitalize p-4 bg-white;
   }
   nav {
     @apply flex justify-center flex-wrap gap-10 p-2;
   }
   .nav-link {
-    flex: 0 0 30%;
-    @apply text-sm text-center;
+    flex: 0 0 40%;
+    @apply text-xl text-center;
   }
   .nav-link img {
     @apply block m-auto p-1 bg-white rounded-full;
+  }
+  .nav-link .link-label {
+    @apply bg-white mt-2 py-1 px-2 rounded-md;
   }
 </style>
