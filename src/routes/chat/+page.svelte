@@ -195,7 +195,7 @@
     {#if $user.authed && !$game.caughtChicken && $user.chicken_tokens === 0 && $isLoaded}<Chicken {baoHeadRef} />{/if}
   </div>{/if}
 
-<style>
+<style type="postcss">
   .chat-input-container {
     background-color: #00feed;
     background-color: #fff;
@@ -230,10 +230,10 @@
     }
   }
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .inverted-icon-outline {
       filter: brightness(0) invert(1);
       mix-blend-mode: difference;
     }
-  }
+  } */
 </style>

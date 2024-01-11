@@ -1,9 +1,6 @@
 <script>
   import BaoHead from "$components/BaoHead.svelte";
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-
   /** @type {any[]} */
   const imgs = [];
   for (let i = 0; i <= 25; i++) {
@@ -49,7 +46,7 @@
   </section>
 </div>
 
-<style>
+<style type="postcss">
   .page-container {
     margin-top: 70px;
   }

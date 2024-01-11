@@ -2,9 +2,6 @@
   import BaoHead from "$components/BaoHead.svelte";
   import { onMount } from "svelte";
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-
   const text = "hello and welcome to my little world :)";
   let displayedText = "";
   let i = 0;
@@ -38,7 +35,7 @@
   </nav>
 </div>
 
-<style>
+<style type="postcss">
   .container {
     @apply mt-[100px] text-black font-bold text-2xl h-full;
     height: 100%;

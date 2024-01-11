@@ -114,7 +114,7 @@
   {#if $user.authState === authStates.drawingChicken}<Paint />{/if}
 </div>
 
-<style>
+<style type="postcss">
   .chat_bubble {
     @apply p-2 rounded-md;
     background-color: #6462ff;
@@ -127,9 +127,9 @@
     font-weight: bold;
     background-color: #00feed;
   }
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     .is-focused {
       justify-content: center;
     }
-  }
+  } */
 </style>
