@@ -38,7 +38,7 @@
   </nav>
 </div>
 
-<style>
+<style type="postcss">
   .container {
     @apply  text-black font-bold text-2xl h-full flex flex-col items-center;
     height: 100%;
@@ -60,4 +60,11 @@
   .nav-link .link-label {
     @apply bg-white mt-2 py-1 px-2 rounded-md;
   }
+  
+  @media (min-width: 768px) {
+    .nav-link {
+      max-width: 200px;
+    }
+  }
+
 </style>

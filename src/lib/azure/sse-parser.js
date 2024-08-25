@@ -25,8 +25,7 @@ export class SSEParser {
 
       const line = accumulatedData.slice(pos, lineEnd).trim();
       pos = lineEnd + 1;
-
-      if (line.startsWith("data:")) {
+      if (line && line.startsWith("data:")) {
         const eventData = line.slice(5).trim();
 
         if (eventData === "[DONE]") {
